@@ -1,0 +1,68 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout">
+
+    <ResponsivePopover
+        title="Travel Intelligence Bot"
+        contentWidth="450px"
+        contentHeight="550px"
+        placement="Top">
+
+        <customHeader>
+            <Toolbar>
+                <Image src="sap-icon://da" width="24px" height="24px" class="sapUiTinyMarginEnd" />
+                <Title text="Travel Intelligence Bot" />
+                <ToolbarSpacer />
+                <Button icon="sap-icon://delete" tooltip="Clear Chat" press="onClearChat" type="Transparent" />
+            </Toolbar>
+        </customHeader>
+
+        <content>
+            <VBox height="100%">
+                <!-- Chat Messages -->
+                <List id="chatMessageList" items="{dash>/chatMessages}"
+                    growing="true" growingThreshold="50"
+                    class="sapUiTinyMargin" noDataText="">
+                    <CustomListItem>
+                        <VBox class="sapUiTinyMargin">
+                            <HBox justifyContent="{= ${dash>type} === 'user' ? 'End' : 'Start'}">
+                                <VBox class="{= ${dash>type} === 'user' ? 'sapUiTinyMarginBegin' : 'sapUiTinyMarginEnd'}"
+                                    width="85%">
+                                    <Panel
+                                        backgroundDesign="{= ${dash>type} === 'user' ? 'Solid' : 'Translucent'}">
+                                        <Text text="{dash>text}" wrapping="true" renderWhitespace="true" />
+                                    </Panel>
+                                    <Text text="{dash>timestamp}" class="sapUiTinyMarginTop"
+                                        visible="{= !!${dash>timestamp}}" />
+                                </VBox>
+                            </HBox>
+                        </VBox>
+                    </CustomListItem>
+                </List>
+
+                <!-- Suggestion Chips -->
+                <HBox wrap="Wrap" class="sapUiTinyMargin">
+                    <Button text="Who is travelling today?" press="onSuggestionClick"
+                        type="Ghost" class="sapUiTinyMarginEnd sapUiTinyMarginBottom" />
+                    <Button text="Currently abroad?" press="onSuggestionClick"
+                        type="Ghost" class="sapUiTinyMarginEnd sapUiTinyMarginBottom" />
+                    <Button text="Returning today?" press="onSuggestionClick"
+                        type="Ghost" class="sapUiTinyMarginEnd sapUiTinyMarginBottom" />
+                    <Button text="Country breakdown" press="onSuggestionClick"
+                        type="Ghost" class="sapUiTinyMarginEnd sapUiTinyMarginBottom" />
+                    <Button text="Upcoming travel" press="onSuggestionClick"
+                        type="Ghost" class="sapUiTinyMarginEnd sapUiTinyMarginBottom" />
+                </HBox>
+
+                <!-- Input -->
+                <Toolbar class="sapUiTinyMargin">
+                    <Input id="chatInput" placeholder="Ask anything about travel..."
+                        submit="onChatInputSubmit" width="100%"
+                        class="sapUiTinyMarginEnd" />
+                    <Button icon="sap-icon://feeder-arrow" press="onSendChat" type="Emphasized" />
+                </Toolbar>
+            </VBox>
+        </content>
+    </ResponsivePopover>
+</core:FragmentDefinition>

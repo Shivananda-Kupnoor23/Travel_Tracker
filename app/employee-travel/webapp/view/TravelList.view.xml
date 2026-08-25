@@ -1,0 +1,87 @@
+<mvc:View
+    controllerName="travel.tracker.employee.controller.TravelList"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+
+    <Page title="My Travel" showNavButton="false">
+        <headerContent>
+            <Select id="employeeSelect" change="onEmployeeChange"
+                selectedKey="{app>/employeeId}">
+            </Select>
+        </headerContent>
+
+        <subHeader>
+            <Toolbar>
+                <ToolbarSpacer />
+                <Button text="Add Travel" icon="sap-icon://add" type="Emphasized"
+                    press="onAddTravel" />
+            </Toolbar>
+        </subHeader>
+
+        <content>
+            <IconTabBar id="travelTabs" select="onTabSelect" selectedKey="current">
+                <items>
+                    <IconTabFilter key="current" text="Current" icon="sap-icon://flight" count="{viewModel>/currentCount}">
+                        <List id="currentList" items="{viewModel>/currentTravels}"
+                              noDataText="No current trips"
+                              itemPress="onTravelPress">
+                            <ObjectListItem
+                                title="{viewModel>travelType} - {= ${viewModel>travelType} === 'International' ? ${viewModel>toCountry} : ${viewModel>fromCity} + ' → ' + ${viewModel>toCity}}"
+                                number="{viewModel>status}"
+                                numberState="{= ${viewModel>status} === 'Travelling' ? 'Warning' : 'Information'}"
+                                type="Navigation">
+                                <attributes>
+                                    <ObjectAttribute text="{viewModel>startDate} → {viewModel>endDate}" />
+                                    <ObjectAttribute text="{viewModel>purpose}" />
+                                </attributes>
+                                <firstStatus>
+                                    <ObjectStatus text="{= ${viewModel>travelType} === 'International' ? 'INTL' : 'DOM'}"
+                                        state="{= ${viewModel>travelType} === 'International' ? 'Information' : 'Success'}" />
+                                </firstStatus>
+                            </ObjectListItem>
+                        </List>
+                    </IconTabFilter>
+
+                    <IconTabFilter key="upcoming" text="Upcoming" icon="sap-icon://date-time" count="{viewModel>/upcomingCount}">
+                        <List id="upcomingList" items="{viewModel>/upcomingTravels}"
+                              noDataText="No upcoming trips"
+                              itemPress="onTravelPress">
+                            <ObjectListItem
+                                title="{viewModel>travelType} - {= ${viewModel>travelType} === 'International' ? ${viewModel>toCountry} : ${viewModel>fromCity} + ' → ' + ${viewModel>toCity}}"
+                                number="{viewModel>status}"
+                                numberState="{= ${viewModel>status} === 'Approved' ? 'Success' : 'Information'}"
+                                type="Navigation">
+                                <attributes>
+                                    <ObjectAttribute text="{viewModel>startDate} → {viewModel>endDate}" />
+                                    <ObjectAttribute text="{viewModel>purpose}" />
+                                </attributes>
+                                <firstStatus>
+                                    <ObjectStatus text="{= ${viewModel>travelType} === 'International' ? 'INTL' : 'DOM'}"
+                                        state="{= ${viewModel>travelType} === 'International' ? 'Information' : 'Success'}" />
+                                </firstStatus>
+                            </ObjectListItem>
+                        </List>
+                    </IconTabFilter>
+
+                    <IconTabFilter key="past" text="Past" icon="sap-icon://history" count="{viewModel>/pastCount}">
+                        <List id="pastList" items="{viewModel>/pastTravels}"
+                              noDataText="No past trips"
+                              itemPress="onTravelPress">
+                            <ObjectListItem
+                                title="{viewModel>travelType} - {= ${viewModel>travelType} === 'International' ? ${viewModel>toCountry} : ${viewModel>fromCity} + ' → ' + ${viewModel>toCity}}"
+                                number="{viewModel>status}"
+                                numberState="{= ${viewModel>status} === 'Completed' ? 'None' : 'Error'}"
+                                type="Navigation">
+                                <attributes>
+                                    <ObjectAttribute text="{viewModel>startDate} → {viewModel>endDate}" />
+                                    <ObjectAttribute text="{viewModel>purpose}" />
+                                </attributes>
+                            </ObjectListItem>
+                        </List>
+                    </IconTabFilter>
+                </items>
+            </IconTabBar>
+        </content>
+    </Page>
+</mvc:View>

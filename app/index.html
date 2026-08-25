@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Tracker</title>
+    <script id="sap-ui-bootstrap"
+        src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js"
+        data-sap-ui-theme="sap_horizon"
+        data-sap-ui-compatVersion="edge"
+        data-sap-ui-async="true"
+        data-sap-ui-frameOptions="trusted"
+        data-sap-ui-libs="sap.m, sap.ui.layout, sap.f">
+    </script>
+    <style>
+        .launchpadTile {
+            margin: 12px;
+        }
+        .launchpadHeader {
+            background: linear-gradient(135deg, #1a73e8 0%, #0d47a1 100%);
+            padding: 32px;
+            color: white;
+            text-align: center;
+            border-radius: 0 0 16px 16px;
+        }
+        .launchpadHeader h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 300;
+        }
+        .launchpadHeader p {
+            margin: 8px 0 0;
+            font-size: 14px;
+            opacity: 0.85;
+        }
+        .tileContainer {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 32px 16px;
+            gap: 24px;
+        }
+        .appTile {
+            width: 280px;
+            height: 180px;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            color: white;
+        }
+        .appTile:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        }
+        .appTile .tileIcon {
+            font-size: 48px;
+            margin-bottom: 12px;
+        }
+        .appTile .tileTitle {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .appTile .tileSub {
+            font-size: 13px;
+            opacity: 0.85;
+        }
+        .employeeTile {
+            background: linear-gradient(135deg, #43a047 0%, #2e7d32 100%);
+        }
+        .adminTile {
+            background: linear-gradient(135deg, #1e88e5 0%, #1565c0 100%);
+        }
+        .loginSection {
+            text-align: center;
+            padding: 16px;
+            background: #f5f5f5;
+            border-radius: 8px;
+            margin: 0 auto;
+            max-width: 400px;
+        }
+        .loginSection select {
+            padding: 8px 16px;
+            font-size: 14px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body class="sapUiBody">
+    <div class="launchpadHeader">
+        <h1>Travel Tracker</h1>
+        <p>Employee Travel Intelligence System</p>
+    </div>
+
+    <div style="text-align:center; padding:24px;">
+        <div class="loginSection">
+            <label for="userSelect"><strong>Login as:</strong></label><br>
+            <select id="userSelect" onchange="onUserChange()">
+                <option value="e003" data-role="employee">Rahul Menon (Employee - Engineering)</option>
+                <option value="e002" data-role="employee">Priya Sharma (Employee - Sales)</option>
+                <option value="e004" data-role="employee">Arun Patel (Employee - Engineering)</option>
+                <option value="e006" data-role="employee">Kiran Rao (Employee - Marketing)</option>
+                <option value="e008" data-role="employee">Deepa Iyer (Employee - Finance)</option>
+                <option value="e001" data-role="admin">Shivananda Kumar (Admin - Engineering)</option>
+                <option value="e005" data-role="admin">Sneha Reddy (Admin - HR)</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="tileContainer" id="tiles">
+        <a href="employee-travel/webapp/index.html" class="appTile employeeTile">
+            <div class="tileIcon">&#9992;</div>
+            <div class="tileTitle">My Travel</div>
+            <div class="tileSub">Submit & manage your trips</div>
+        </a>
+        <a href="admin-dashboard/webapp/index.html" class="appTile adminTile" id="adminTile">
+            <div class="tileIcon">&#128202;</div>
+            <div class="tileTitle">Travel Dashboard</div>
+            <div class="tileSub">Company-wide travel intelligence</div>
+        </a>
+    </div>
+
+    <script>
+        function onUserChange() {
+            var select = document.getElementById("userSelect");
+            var option = select.options[select.selectedIndex];
+            var role = option.getAttribute("data-role");
+            var adminTile = document.getElementById("adminTile");
+            adminTile.style.display = (role === "admin") ? "flex" : "none";
+        }
+        // Initialize - show admin tile only for admin users
+        window.addEventListener("load", onUserChange);
+    </script>
+</body>
+</html>

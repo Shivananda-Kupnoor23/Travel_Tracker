@@ -1,0 +1,123 @@
+<mvc:View
+    controllerName="travel.tracker.employee.controller.TravelDetail"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core">
+
+    <Page title="{viewModel>/pageTitle}" showNavButton="true" navButtonPress="onNavBack">
+        <headerContent>
+            <Button text="Cancel Travel" icon="sap-icon://decline" type="Reject"
+                press="onCancelTravel"
+                visible="{= ${viewModel>/mode} === 'display' &amp;&amp; (${viewModel>/travel/status} === 'Planned' || ${viewModel>/travel/status} === 'Approved')}" />
+        </headerContent>
+
+        <content>
+            <VBox class="sapUiMediumMargin">
+                <f:SimpleForm editable="{= ${viewModel>/mode} !== 'display'}"
+                    layout="ResponsiveGridLayout"
+                    labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12"
+                    emptySpanXL="0" emptySpanL="0" emptySpanM="0"
+                    columnsXL="1" columnsL="1" columnsM="1">
+
+                    <f:toolbar>
+                        <Toolbar>
+                            <Title text="Travel Details" />
+                            <ToolbarSpacer />
+                            <Button text="Edit" icon="sap-icon://edit" type="Emphasized"
+                                press="onEdit"
+                                visible="{= ${viewModel>/mode} === 'display' &amp;&amp; (${viewModel>/travel/status} === 'Planned')}" />
+                            <Button text="Save" icon="sap-icon://save" type="Emphasized"
+                                press="onSave"
+                                visible="{= ${viewModel>/mode} !== 'display'}" />
+                            <Button text="Cancel" press="onCancelEdit"
+                                visible="{= ${viewModel>/mode} !== 'display'}" />
+                        </Toolbar>
+                    </f:toolbar>
+
+                    <!-- Travel Type -->
+                    <Label text="Travel Type" required="true" />
+                    <RadioButtonGroup id="travelTypeGroup"
+                        selectedIndex="{= ${viewModel>/travel/travelType} === 'International' ? 1 : 0}"
+                        select="onTravelTypeChange"
+                        editable="{= ${viewModel>/mode} !== 'display'}">
+                        <RadioButton text="Domestic" />
+                        <RadioButton text="International" />
+                    </RadioButtonGroup>
+
+                    <!-- Domestic Fields -->
+                    <Label text="From City" required="true"
+                        visible="{= ${viewModel>/travel/travelType} === 'Domestic'}" />
+                    <Input value="{viewModel>/travel/fromCity}"
+                        visible="{= ${viewModel>/travel/travelType} === 'Domestic'}"
+                        editable="{= ${viewModel>/mode} !== 'display'}"
+                        placeholder="e.g. Mumbai, Delhi, Bangalore" />
+
+                    <Label text="To City" required="true"
+                        visible="{= ${viewModel>/travel/travelType} === 'Domestic'}" />
+                    <Input value="{viewModel>/travel/toCity}"
+                        visible="{= ${viewModel>/travel/travelType} === 'Domestic'}"
+                        editable="{= ${viewModel>/mode} !== 'display'}"
+                        placeholder="e.g. Chennai, Hyderabad, Pune" />
+
+                    <!-- International Fields -->
+                    <Label text="From Country" required="true"
+                        visible="{= ${viewModel>/travel/travelType} === 'International'}" />
+                    <Input value="{viewModel>/travel/fromCountry}"
+                        visible="{= ${viewModel>/travel/travelType} === 'International'}"
+                        editable="{= ${viewModel>/mode} !== 'display'}"
+                        placeholder="e.g. India" />
+
+                    <Label text="To Country" required="true"
+                        visible="{= ${viewModel>/travel/travelType} === 'International'}" />
+                    <Input value="{viewModel>/travel/toCountry}"
+                        visible="{= ${viewModel>/travel/travelType} === 'International'}"
+                        editable="{= ${viewModel>/mode} !== 'display'}"
+                        placeholder="e.g. Singapore, USA, UK" />
+
+                    <Label text="Passport Number"
+                        visible="{= ${viewModel>/travel/travelType} === 'International'}" />
+                    <Input value="{viewModel>/travel/passportNumber}"
+                        visible="{= ${viewModel>/travel/travelType} === 'International'}"
+                        editable="{= ${viewModel>/mode} !== 'display'}"
+                        placeholder="e.g. A1234567" />
+
+                    <Label text="Visa Status"
+                        visible="{= ${viewModel>/travel/travelType} === 'International'}" />
+                    <Select selectedKey="{viewModel>/travel/visaStatus}"
+                        visible="{= ${viewModel>/travel/travelType} === 'International'}"
+                        enabled="{= ${viewModel>/mode} !== 'display'}">
+                        <core:Item key="" text="-- Select --" />
+                        <core:Item key="Have Visa" text="Have Visa" />
+                        <core:Item key="Need Visa" text="Need Visa" />
+                        <core:Item key="Applied" text="Applied" />
+                    </Select>
+
+                    <!-- Common Fields -->
+                    <Label text="Start Date" required="true" />
+                    <DatePicker value="{viewModel>/travel/startDate}"
+                        valueFormat="yyyy-MM-dd" displayFormat="dd-MMM-yyyy"
+                        editable="{= ${viewModel>/mode} !== 'display'}" />
+
+                    <Label text="End Date" required="true" />
+                    <DatePicker value="{viewModel>/travel/endDate}"
+                        valueFormat="yyyy-MM-dd" displayFormat="dd-MMM-yyyy"
+                        editable="{= ${viewModel>/mode} !== 'display'}" />
+
+                    <Label text="Purpose" />
+                    <TextArea value="{viewModel>/travel/purpose}" rows="3"
+                        editable="{= ${viewModel>/mode} !== 'display'}"
+                        placeholder="e.g. Business Meeting, Conference, Training" />
+
+                    <!-- Status (display only) -->
+                    <Label text="Status"
+                        visible="{= ${viewModel>/mode} === 'display'}" />
+                    <ObjectStatus text="{viewModel>/travel/status}"
+                        state="{= ${viewModel>/travel/status} === 'Planned' ? 'Information' : ${viewModel>/travel/status} === 'Approved' ? 'Success' : ${viewModel>/travel/status} === 'Travelling' ? 'Warning' : ${viewModel>/travel/status} === 'Completed' ? 'None' : 'Error'}"
+                        visible="{= ${viewModel>/mode} === 'display'}" />
+
+                </f:SimpleForm>
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>

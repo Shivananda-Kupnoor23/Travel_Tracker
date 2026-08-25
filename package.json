@@ -1,0 +1,24 @@
+{
+  "name": "travel-tracker",
+  "version": "1.0.0",
+  "dependencies": {
+    "@sap/cds": "^9",
+    "express": "^4",
+    "@cap-js/hana": "^2"
+  },
+  "devDependencies": {
+    "@cap-js/sqlite": "^2",
+    "@sap/cds-dk": "^9"
+  },
+  "scripts": {
+    "start": "cds-serve"
+  },
+  "private": true,
+  "cds": {
+    "requires": {
+      "db": {
+        "kind": "sql"
+      }
+    }
+  }
+}

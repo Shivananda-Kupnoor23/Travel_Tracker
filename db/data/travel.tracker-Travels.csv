@@ -1,0 +1,31 @@
+ID,employee_ID,travelType,fromCountry,toCountry,fromCity,toCity,startDate,endDate,purpose,status,passportNumber,visaStatus,createdAt,modifiedAt
+t001,e003,International,India,Singapore,,,"2026-08-20","2026-08-30",Business Meeting,Travelling,P1234567,Have Visa,2026-08-10T08:00:00Z,2026-08-10T08:00:00Z
+t002,e002,International,India,USA,,,"2026-08-18","2026-09-02",Client Presentation,Travelling,P2345678,Have Visa,2026-08-08T08:00:00Z,2026-08-08T08:00:00Z
+t003,e004,International,India,UK,,,"2026-08-22","2026-08-25",Technical Workshop,Travelling,P3456789,Have Visa,2026-08-12T08:00:00Z,2026-08-12T08:00:00Z
+t004,e006,International,India,UAE,,,"2026-08-19","2026-08-28",Trade Show,Travelling,P4567890,Have Visa,2026-08-09T08:00:00Z,2026-08-09T08:00:00Z
+t005,e007,International,India,Singapore,,,"2026-08-21","2026-09-01",Partner Meeting,Travelling,P5678901,Have Visa,2026-08-11T08:00:00Z,2026-08-11T08:00:00Z
+t006,e009,International,India,USA,,,"2026-08-23","2026-09-05",Conference,Travelling,P6789012,Have Visa,2026-08-13T08:00:00Z,2026-08-13T08:00:00Z
+t007,e011,International,India,Singapore,,,"2026-08-17","2026-08-27",Product Demo,Travelling,P7890123,Have Visa,2026-08-07T08:00:00Z,2026-08-07T08:00:00Z
+t008,e008,International,India,Germany,,,"2026-08-24","2026-09-03",Training Program,Travelling,P8901234,Have Visa,2026-08-14T08:00:00Z,2026-08-14T08:00:00Z
+t009,e012,International,India,Japan,,,"2026-08-20","2026-08-25",Vendor Meeting,Travelling,P9012345,Have Visa,2026-08-10T08:00:00Z,2026-08-10T08:00:00Z
+t010,e014,International,India,UAE,,,"2026-08-22","2026-08-31",Sales Pitch,Travelling,P0123456,Have Visa,2026-08-12T08:00:00Z,2026-08-12T08:00:00Z
+t011,e010,Domestic,India,India,Mumbai,Bangalore,"2026-08-23","2026-08-26",HR Workshop,,,,2026-08-13T08:00:00Z,2026-08-13T08:00:00Z
+t012,e013,Domestic,India,India,Delhi,Chennai,"2026-08-24","2026-08-27",Audit Review,,,,2026-08-14T08:00:00Z,2026-08-14T08:00:00Z
+t013,e015,Domestic,India,India,Bangalore,Hyderabad,"2026-08-22","2026-08-25",Code Review,,,,2026-08-12T08:00:00Z,2026-08-12T08:00:00Z
+t014,e003,Domestic,India,India,Delhi,Pune,"2026-08-24","2026-08-26",Team Offsite,,,,2026-08-14T08:00:00Z,2026-08-14T08:00:00Z
+t015,e005,Domestic,India,India,Mumbai,Delhi,"2026-08-21","2026-08-25",Policy Review,,,,2026-08-11T08:00:00Z,2026-08-11T08:00:00Z
+t016,e004,International,India,Australia,,,"2026-08-28","2026-09-08",Tech Summit,Approved,P3456789,Have Visa,2026-08-18T08:00:00Z,2026-08-18T08:00:00Z
+t017,e002,Domestic,India,India,Mumbai,Kolkata,"2026-08-29","2026-09-01",Regional Sales Meet,Approved,,,,2026-08-19T08:00:00Z,2026-08-19T08:00:00Z
+t018,e006,International,India,Singapore,,,"2026-08-30","2026-09-10",Marketing Summit,Approved,P4567890,Have Visa,2026-08-20T08:00:00Z,2026-08-20T08:00:00Z
+t019,e011,Domestic,India,India,Chennai,Bangalore,"2026-08-27","2026-08-29",Sprint Planning,Approved,,,,2026-08-17T08:00:00Z,2026-08-17T08:00:00Z
+t020,e015,International,India,USA,,,"2026-08-31","2026-09-12",Developer Conference,Approved,P1122334,Applied,2026-08-21T08:00:00Z,2026-08-21T08:00:00Z
+t021,e009,Domestic,India,India,Delhi,Jaipur,"2026-09-01","2026-09-03",Brand Campaign,Planned,,,,2026-08-22T08:00:00Z,2026-08-22T08:00:00Z
+t022,e010,International,India,UK,,,"2026-09-02","2026-09-09",HR Global Summit,Planned,P2233445,Need Visa,2026-08-23T08:00:00Z,2026-08-23T08:00:00Z
+t023,e003,International,India,USA,,,"2026-08-01","2026-08-10",Architecture Review,Completed,P1234567,Have Visa,2026-07-20T08:00:00Z,2026-07-20T08:00:00Z
+t024,e007,Domestic,India,India,Mumbai,Pune,"2026-08-05","2026-08-08",Sales Training,Completed,,,,2026-07-25T08:00:00Z,2026-07-25T08:00:00Z
+t025,e008,Domestic,India,India,Bangalore,Mumbai,"2026-08-10","2026-08-13",Budget Review,Completed,,,,2026-07-30T08:00:00Z,2026-07-30T08:00:00Z
+t026,e014,International,India,Singapore,,,"2026-08-02","2026-08-12",Sales Conference,Completed,P0123456,Have Visa,2026-07-22T08:00:00Z,2026-07-22T08:00:00Z
+t027,e012,Domestic,India,India,Chennai,Delhi,"2026-08-08","2026-08-11",Tax Filing,Completed,,,,2026-07-28T08:00:00Z,2026-07-28T08:00:00Z
+t028,e006,International,India,Japan,,,"2026-09-05","2026-09-15",Product Launch,Planned,P4567890,Applied,2026-08-25T08:00:00Z,2026-08-25T08:00:00Z
+t029,e013,International,India,Germany,,,"2026-09-01","2026-09-07",Finance Summit,Planned,P3344556,Need Visa,2026-08-24T08:00:00Z,2026-08-24T08:00:00Z
+t030,e005,International,India,Singapore,,,"2026-08-15","2026-08-25",HR Tech Conference,Travelling,P5566778,Have Visa,2026-08-05T08:00:00Z,2026-08-05T08:00:00Z

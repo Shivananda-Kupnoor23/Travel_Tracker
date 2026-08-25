@@ -1,0 +1,69 @@
+{
+  "_version": "1.65.0",
+  "sap.app": {
+    "id": "travel.tracker.admin",
+    "type": "application",
+    "title": "Travel Dashboard",
+    "description": "Admin Travel Intelligence Dashboard",
+    "applicationVersion": { "version": "1.0.0" },
+    "dataSources": {
+      "TravelService": {
+        "uri": "/travel/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "4.0"
+        }
+      }
+    }
+  },
+  "sap.ui5": {
+    "rootView": {
+      "viewName": "travel.tracker.admin.view.App",
+      "type": "XML",
+      "id": "app"
+    },
+    "models": {
+      "": {
+        "dataSource": "TravelService",
+        "settings": {
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true
+        },
+        "type": "sap.ui.model.odata.v4.ODataModel"
+      }
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "viewPath": "travel.tracker.admin.view",
+        "controlId": "appControl",
+        "controlAggregation": "pages"
+      },
+      "routes": [
+        {
+          "name": "Dashboard",
+          "pattern": "",
+          "target": "Dashboard"
+        },
+        {
+          "name": "CountryDetail",
+          "pattern": "country/{country}",
+          "target": "CountryDetail"
+        }
+      ],
+      "targets": {
+        "Dashboard": {
+          "viewName": "Dashboard",
+          "viewLevel": 1
+        },
+        "CountryDetail": {
+          "viewName": "CountryDetail",
+          "viewLevel": 2
+        }
+      }
+    },
+    "resources": { "css": [] }
+  }
+}

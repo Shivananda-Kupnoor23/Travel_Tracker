@@ -1,0 +1,16 @@
+ID,name,email,department,manager,role,createdAt,modifiedAt
+e001,Shivananda Kumar,shivananda@company.com,Engineering,Rajesh Nair,admin,2026-01-15T08:00:00Z,2026-01-15T08:00:00Z
+e002,Priya Sharma,priya@company.com,Sales,Anita Desai,employee,2026-01-15T08:00:00Z,2026-01-15T08:00:00Z
+e003,Rahul Menon,rahul@company.com,Engineering,Shivananda Kumar,employee,2026-02-01T08:00:00Z,2026-02-01T08:00:00Z
+e004,Arun Patel,arun@company.com,Engineering,Shivananda Kumar,employee,2026-02-01T08:00:00Z,2026-02-01T08:00:00Z
+e005,Sneha Reddy,sneha@company.com,HR,Meera Joshi,admin,2026-01-20T08:00:00Z,2026-01-20T08:00:00Z
+e006,Kiran Rao,kiran@company.com,Marketing,Vikram Sinha,employee,2026-03-01T08:00:00Z,2026-03-01T08:00:00Z
+e007,Neha Gupta,neha@company.com,Sales,Anita Desai,employee,2026-03-10T08:00:00Z,2026-03-10T08:00:00Z
+e008,Deepa Iyer,deepa@company.com,Finance,Suresh Kulkarni,employee,2026-02-15T08:00:00Z,2026-02-15T08:00:00Z
+e009,Vikram Sinha,vikram@company.com,Marketing,Rajesh Nair,employee,2026-01-15T08:00:00Z,2026-01-15T08:00:00Z
+e010,Meera Joshi,meera@company.com,HR,Rajesh Nair,employee,2026-01-15T08:00:00Z,2026-01-15T08:00:00Z
+e011,Arjun Nair,arjun@company.com,Engineering,Shivananda Kumar,employee,2026-04-01T08:00:00Z,2026-04-01T08:00:00Z
+e012,Kavita Pillai,kavita@company.com,Finance,Suresh Kulkarni,employee,2026-03-20T08:00:00Z,2026-03-20T08:00:00Z
+e013,Suresh Kulkarni,suresh@company.com,Finance,Rajesh Nair,employee,2026-01-15T08:00:00Z,2026-01-15T08:00:00Z
+e014,Anita Desai,anita@company.com,Sales,Rajesh Nair,employee,2026-01-15T08:00:00Z,2026-01-15T08:00:00Z
+e015,Ravi Verma,ravi@company.com,Engineering,Shivananda Kumar,employee,2026-05-01T08:00:00Z,2026-05-01T08:00:00Z
