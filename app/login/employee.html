@@ -402,7 +402,7 @@
             <div class="divider"><span>OR</span></div>
 
             <div class="admin-link">
-                Don't have access? <a href="admin.html">Login as Admin / HR</a>
+                Don't have access? <a href="/login/admin.html">Login as Admin / HR</a>
             </div>
 
             <div class="demo-box">
@@ -498,7 +498,7 @@
                         role: data.role,
                         department: data.department
                     }));
-                    window.location.href = '../employee-travel/webapp/index.html';
+                    window.location.href = '/employee-travel/webapp/index.html';
                 } else {
                     errorMsg.textContent = data.message || 'Login failed. Please try again.';
                     errorMsg.className = 'error-msg show';

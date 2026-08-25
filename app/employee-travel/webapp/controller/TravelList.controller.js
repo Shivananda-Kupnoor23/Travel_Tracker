@@ -31,7 +31,7 @@ sap.ui.define([
                 this.byId("userAvatar").setInitials(sInitials);
             } else {
                 // No session — redirect to login
-                window.location.href = "../login/employee.html";
+                window.location.href = "/login/employee.html";
                 return;
             }
 
@@ -91,7 +91,7 @@ sap.ui.define([
 
         onLogout: function () {
             sessionStorage.removeItem("loggedInUser");
-            window.location.href = "../login/employee.html";
+            window.location.href = "/login/employee.html";
         },
 
         onTabSelect: function () {}

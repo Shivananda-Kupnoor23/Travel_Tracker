@@ -390,7 +390,7 @@
             <div class="divider"><span>OR</span></div>
 
             <div class="employee-link">
-                Not an admin? <a href="employee.html">Login as Employee</a>
+                Not an admin? <a href="/login/employee.html">Login as Employee</a>
             </div>
 
             <div class="demo-box">
@@ -476,7 +476,7 @@
                         role: data.role,
                         department: data.department
                     }));
-                    window.location.href = '../admin-dashboard/webapp/index.html';
+                    window.location.href = '/admin-dashboard/webapp/index.html';
                 } else {
                     errorMsg.textContent = data.message || 'Login failed. Please try again.';
                     errorMsg.className = 'error-msg show';
