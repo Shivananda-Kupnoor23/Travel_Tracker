@@ -36,7 +36,7 @@ service TravelService @(path: '/travel') {
   };
 
   // Admin actions
-  action approveTravel(travelId : UUID) returns Travels;
-  action rejectTravel(travelId : UUID)  returns Travels;
-  action cancelTravel(travelId : UUID)  returns Travels;
+  action approveTravel(travelId : String) returns Travels;
+  action rejectTravel(travelId : String)  returns Travels;
+  action cancelTravel(travelId : String)  returns Travels;
 }

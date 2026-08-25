@@ -1,17 +1,19 @@
 namespace travel.tracker;
 
-using { cuid, managed } from '@sap/cds/common';
+using { managed } from '@sap/cds/common';
 
-entity Employees : cuid, managed {
-  name       : String(100) @mandatory;
-  email      : String(100) @mandatory;
-  department : String(50);
-  manager    : String(100);
-  role       : String(20) default 'employee';  // employee | admin
-  travels    : Composition of many Travels on travels.employee = $self;
+entity Employees : managed {
+  key ID       : String(10);
+  name         : String(100) @mandatory;
+  email        : String(100) @mandatory;
+  department   : String(50);
+  manager      : String(100);
+  role         : String(20) default 'employee';  // employee | admin
+  travels      : Composition of many Travels on travels.employee = $self;
 }
 
-entity Travels : cuid, managed {
+entity Travels : managed {
+  key ID         : String(10);
   employee       : Association to Employees;
   travelType     : String(20) @mandatory;       // Domestic | International
   fromCountry    : String(100);
