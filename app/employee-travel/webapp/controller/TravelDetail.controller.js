@@ -21,6 +21,15 @@ sap.ui.define([
             oRouter.getRoute("TravelCreate").attachPatternMatched(this._onCreateMatched, this);
         },
 
+        _getEmployeeId: function () {
+            // Get from the TravelList controller's selected employee
+            var oSelect = sap.ui.getCore().byId("__component0---TravelList--employeeSelect");
+            if (oSelect && oSelect.getSelectedKey()) {
+                return oSelect.getSelectedKey();
+            }
+            return "e003"; // default
+        },
+
         _onDetailMatched: function (oEvent) {
             var sTravelId = oEvent.getParameter("arguments").travelId;
             this._loadTravel(sTravelId);
@@ -48,11 +57,11 @@ sap.ui.define([
 
         _loadTravel: function (sTravelId) {
             var that = this;
-            var oModel = this.getOwnerComponent().getModel();
-            var oCtx = oModel.bindContext("/Travels('" + sTravelId + "')");
-
-            oCtx.requestObject().then(function (oData) {
-                that.oViewModel.setProperty("/travel", Object.assign({}, oData));
+            jQuery.ajax({
+                url: "/travel/Travels('" + sTravelId + "')",
+                success: function (data) {
+                    that.oViewModel.setProperty("/travel", data);
+                }
             });
         },
 
@@ -109,15 +118,12 @@ sap.ui.define([
                 return;
             }
 
-            var oModel = this.getOwnerComponent().getModel();
-            var sEmployeeId = this.getOwnerComponent().getModel("app").getProperty("/employeeId");
-
             if (sMode === "create") {
-                var oBinding = oModel.bindList("/Travels");
-                var oContext = oBinding.create({
+                var sEmployeeId = this._getEmployeeId();
+                var oPayload = {
                     employee_ID: sEmployeeId,
                     travelType: oTravel.travelType,
-                    fromCountry: oTravel.travelType === "Domestic" ? "India" : oTravel.fromCountry,
+                    fromCountry: oTravel.travelType === "Domestic" ? "India" : (oTravel.fromCountry || "India"),
                     toCountry: oTravel.travelType === "Domestic" ? "India" : oTravel.toCountry,
                     fromCity: oTravel.travelType === "Domestic" ? oTravel.fromCity : "",
                     toCity: oTravel.travelType === "Domestic" ? oTravel.toCity : "",
@@ -125,54 +131,51 @@ sap.ui.define([
                     endDate: oTravel.endDate,
                     purpose: oTravel.purpose || "",
                     status: "Planned",
-                    passportNumber: oTravel.travelType === "International" ? oTravel.passportNumber : "",
-                    visaStatus: oTravel.travelType === "International" ? oTravel.visaStatus : ""
-                });
+                    passportNumber: oTravel.travelType === "International" ? (oTravel.passportNumber || "") : "",
+                    visaStatus: oTravel.travelType === "International" ? (oTravel.visaStatus || "") : ""
+                };
 
-                oModel.submitBatch("$auto").then(function () {
-                    MessageToast.show("Travel created successfully!");
-                    that.onNavBack();
-                }).catch(function (oError) {
-                    MessageBox.error("Error creating travel: " + oError.message);
+                jQuery.ajax({
+                    url: "/travel/Travels",
+                    method: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify(oPayload),
+                    success: function () {
+                        MessageToast.show("Travel created successfully!");
+                        that.onNavBack();
+                    },
+                    error: function () {
+                        MessageBox.error("Error creating travel");
+                    }
                 });
             } else {
-                // Edit mode - update existing
-                var sPath = "/Travels('" + oTravel.ID + "')";
-                var oCtx = oModel.bindContext(sPath);
-                oCtx.requestObject().then(function () {
-                    var oBoundCtx = oModel.bindContext(sPath, null, { $$updateGroupId: "$auto" });
-                    oBoundCtx.requestObject().then(function () {
-                        var oPatchData = {
-                            travelType: oTravel.travelType,
-                            fromCountry: oTravel.fromCountry,
-                            toCountry: oTravel.toCountry,
-                            fromCity: oTravel.fromCity,
-                            toCity: oTravel.toCity,
-                            startDate: oTravel.startDate,
-                            endDate: oTravel.endDate,
-                            purpose: oTravel.purpose,
-                            passportNumber: oTravel.passportNumber,
-                            visaStatus: oTravel.visaStatus
-                        };
+                // Edit mode
+                var oPatchData = {
+                    travelType: oTravel.travelType,
+                    fromCountry: oTravel.fromCountry,
+                    toCountry: oTravel.toCountry,
+                    fromCity: oTravel.fromCity || "",
+                    toCity: oTravel.toCity || "",
+                    startDate: oTravel.startDate,
+                    endDate: oTravel.endDate,
+                    purpose: oTravel.purpose || "",
+                    passportNumber: oTravel.passportNumber || "",
+                    visaStatus: oTravel.visaStatus || ""
+                };
 
-                        var oPatchBinding = oModel.bindContext(sPath);
-                        oPatchBinding.requestObject().then(function () {
-                            jQuery.ajax({
-                                url: "/travel/Travels('" + oTravel.ID + "')",
-                                method: "PATCH",
-                                contentType: "application/json",
-                                data: JSON.stringify(oPatchData),
-                                success: function () {
-                                    MessageToast.show("Travel updated successfully!");
-                                    that.oViewModel.setProperty("/mode", "display");
-                                    that.oViewModel.setProperty("/pageTitle", "Travel Details");
-                                },
-                                error: function (err) {
-                                    MessageBox.error("Error updating travel");
-                                }
-                            });
-                        });
-                    });
+                jQuery.ajax({
+                    url: "/travel/Travels('" + oTravel.ID + "')",
+                    method: "PATCH",
+                    contentType: "application/json",
+                    data: JSON.stringify(oPatchData),
+                    success: function () {
+                        MessageToast.show("Travel updated successfully!");
+                        that.oViewModel.setProperty("/mode", "display");
+                        that.oViewModel.setProperty("/pageTitle", "Travel Details");
+                    },
+                    error: function () {
+                        MessageBox.error("Error updating travel");
+                    }
                 });
             }
         },
