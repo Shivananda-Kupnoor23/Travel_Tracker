@@ -35,6 +35,16 @@ service TravelService @(path: '/travel') {
     departing  : Integer;
   };
 
+  // Login
+  action login(email : String, password : String) returns {
+    success    : Boolean;
+    employeeId : String;
+    name       : String;
+    role       : String;
+    department : String;
+    message    : String;
+  };
+
   // Admin actions
   action approveTravel(travelId : String) returns Travels;
   action rejectTravel(travelId : String)  returns Travels;

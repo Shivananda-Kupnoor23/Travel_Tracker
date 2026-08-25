@@ -166,6 +166,30 @@ module.exports = cds.service.impl(async function () {
     return result;
   });
 
+  // ===================== LOGIN =====================
+
+  this.on('login', async (req) => {
+    const { email, password } = req.data;
+    if (!email || !password) {
+      return { success: false, message: 'Email and password are required' };
+    }
+    const employee = await SELECT.one.from(Employees).where({ email: email });
+    if (!employee) {
+      return { success: false, message: 'Invalid email address' };
+    }
+    if (employee.password !== password) {
+      return { success: false, message: 'Incorrect password' };
+    }
+    return {
+      success: true,
+      employeeId: employee.ID,
+      name: employee.name,
+      role: employee.role,
+      department: employee.department,
+      message: 'Login successful'
+    };
+  });
+
   // ===================== ADMIN ACTIONS =====================
 
   this.on('approveTravel', async (req) => {

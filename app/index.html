@@ -1,142 +1,175 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Travel Tracker</title>
-    <script id="sap-ui-bootstrap"
-        src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js"
-        data-sap-ui-theme="sap_horizon"
-        data-sap-ui-compatVersion="edge"
-        data-sap-ui-async="true"
-        data-sap-ui-frameOptions="trusted"
-        data-sap-ui-libs="sap.m, sap.ui.layout, sap.f">
-    </script>
     <style>
-        .launchpadTile {
-            margin: 12px;
-        }
-        .launchpadHeader {
-            background: linear-gradient(135deg, #1a73e8 0%, #0d47a1 100%);
-            padding: 32px;
-            color: white;
-            text-align: center;
-            border-radius: 0 0 16px 16px;
-        }
-        .launchpadHeader h1 {
-            margin: 0;
-            font-size: 28px;
-            font-weight: 300;
-        }
-        .launchpadHeader p {
-            margin: 8px 0 0;
-            font-size: 14px;
-            opacity: 0.85;
-        }
-        .tileContainer {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            padding: 32px 16px;
-            gap: 24px;
-        }
-        .appTile {
-            width: 280px;
-            height: 180px;
-            border-radius: 12px;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: '72', 'Segoe UI', Arial, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            text-decoration: none;
+        }
+
+        .landing {
+            text-align: center;
             color: white;
         }
-        .appTile:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+
+        .landing-icon {
+            font-size: 72px;
+            margin-bottom: 16px;
         }
-        .appTile .tileIcon {
+
+        .landing h1 {
+            font-size: 42px;
+            font-weight: 300;
+            letter-spacing: 3px;
+            margin-bottom: 8px;
+        }
+
+        .landing p {
+            font-size: 16px;
+            opacity: 0.85;
+            margin-bottom: 56px;
+        }
+
+        .cards {
+            display: flex;
+            gap: 32px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .card {
+            width: 300px;
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            text-decoration: none;
+            color: #333;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+        }
+
+        .card-header {
+            padding: 40px 24px 32px;
+            color: white;
+            text-align: center;
+        }
+
+        .card-header.employee {
+            background: linear-gradient(135deg, #43a047 0%, #2e7d32 100%);
+        }
+
+        .card-header.admin {
+            background: linear-gradient(135deg, #1e88e5 0%, #1565c0 100%);
+        }
+
+        .card-header .card-icon {
             font-size: 48px;
             margin-bottom: 12px;
         }
-        .appTile .tileTitle {
-            font-size: 18px;
+
+        .card-header h2 {
+            font-size: 22px;
             font-weight: 600;
-            margin-bottom: 4px;
         }
-        .appTile .tileSub {
-            font-size: 13px;
-            opacity: 0.85;
+
+        .card-body {
+            padding: 24px;
         }
-        .employeeTile {
-            background: linear-gradient(135deg, #43a047 0%, #2e7d32 100%);
-        }
-        .adminTile {
-            background: linear-gradient(135deg, #1e88e5 0%, #1565c0 100%);
-        }
-        .loginSection {
-            text-align: center;
-            padding: 16px;
-            background: #f5f5f5;
-            border-radius: 8px;
-            margin: 0 auto;
-            max-width: 400px;
-        }
-        .loginSection select {
-            padding: 8px 16px;
+
+        .card-body p {
             font-size: 14px;
-            border-radius: 4px;
-            border: 1px solid #ccc;
-            margin-top: 8px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .card-body .card-btn {
+            display: block;
+            text-align: center;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        .card-body .card-btn:hover {
+            opacity: 0.9;
+        }
+
+        .card-btn.employee-btn {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .card-btn.admin-btn {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+
+        .footer {
+            margin-top: 48px;
+            color: rgba(255,255,255,0.5);
+            font-size: 13px;
+        }
+
+        @media (max-width: 680px) {
+            .cards { flex-direction: column; align-items: center; }
+            .landing h1 { font-size: 28px; }
         }
     </style>
 </head>
-<body class="sapUiBody">
-    <div class="launchpadHeader">
-        <h1>Travel Tracker</h1>
+<body>
+    <div class="landing">
+        <div class="landing-icon">&#9992;</div>
+        <h1>TRAVEL TRACKER</h1>
         <p>Employee Travel Intelligence System</p>
-    </div>
 
-    <div style="text-align:center; padding:24px;">
-        <div class="loginSection">
-            <label for="userSelect"><strong>Login as:</strong></label><br>
-            <select id="userSelect" onchange="onUserChange()">
-                <option value="e003" data-role="employee">Rahul Menon (Employee - Engineering)</option>
-                <option value="e002" data-role="employee">Priya Sharma (Employee - Sales)</option>
-                <option value="e004" data-role="employee">Arun Patel (Employee - Engineering)</option>
-                <option value="e006" data-role="employee">Kiran Rao (Employee - Marketing)</option>
-                <option value="e008" data-role="employee">Deepa Iyer (Employee - Finance)</option>
-                <option value="e001" data-role="admin">Shivananda Kumar (Admin - Engineering)</option>
-                <option value="e005" data-role="admin">Sneha Reddy (Admin - HR)</option>
-            </select>
+        <div class="cards">
+            <!-- Employee Login Card -->
+            <a href="login/employee.html" class="card">
+                <div class="card-header employee">
+                    <div class="card-icon">&#128100;</div>
+                    <h2>Employee Login</h2>
+                </div>
+                <div class="card-body">
+                    <p>Submit and manage your business travel. Track your current, upcoming, and past trips. Domestic & international support.</p>
+                    <span class="card-btn employee-btn">Sign in as Employee &rarr;</span>
+                </div>
+            </a>
+
+            <!-- Admin Login Card -->
+            <a href="login/admin.html" class="card">
+                <div class="card-header admin">
+                    <div class="card-icon">&#128188;</div>
+                    <h2>Admin / HR Login</h2>
+                </div>
+                <div class="card-body">
+                    <p>Company-wide travel intelligence dashboard. Real-time analytics, world map, calendar view, and AI-powered travel chatbot.</p>
+                    <span class="card-btn admin-btn">Sign in as Admin &rarr;</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="footer">
+            Travel Tracker &copy; 2026
         </div>
     </div>
-
-    <div class="tileContainer" id="tiles">
-        <a href="employee-travel/webapp/index.html" class="appTile employeeTile">
-            <div class="tileIcon">&#9992;</div>
-            <div class="tileTitle">My Travel</div>
-            <div class="tileSub">Submit & manage your trips</div>
-        </a>
-        <a href="admin-dashboard/webapp/index.html" class="appTile adminTile" id="adminTile">
-            <div class="tileIcon">&#128202;</div>
-            <div class="tileTitle">Travel Dashboard</div>
-            <div class="tileSub">Company-wide travel intelligence</div>
-        </a>
-    </div>
-
-    <script>
-        function onUserChange() {
-            var select = document.getElementById("userSelect");
-            var option = select.options[select.selectedIndex];
-            var role = option.getAttribute("data-role");
-            var adminTile = document.getElementById("adminTile");
-            adminTile.style.display = (role === "admin") ? "flex" : "none";
-        }
-        // Initialize - show admin tile only for admin users
-        window.addEventListener("load", onUserChange);
-    </script>
 </body>
 </html>

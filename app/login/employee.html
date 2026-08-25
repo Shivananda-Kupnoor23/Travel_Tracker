@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Login - Travel Tracker</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: '72', 'Segoe UI', Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 50%, #a5d6a7 100%);
+        }
+
+        .login-container {
+            display: flex;
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        /* Left panel - branding */
+        .brand-panel {
+            flex: 1;
+            background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 50%, #0d3b0f 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .brand-panel::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .brand-icon {
+            font-size: 80px;
+            margin-bottom: 24px;
+            z-index: 1;
+        }
+
+        .brand-title {
+            font-size: 36px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+            z-index: 1;
+        }
+
+        .brand-subtitle {
+            font-size: 16px;
+            opacity: 0.8;
+            text-align: center;
+            line-height: 1.6;
+            z-index: 1;
+        }
+
+        .brand-features {
+            margin-top: 48px;
+            z-index: 1;
+        }
+
+        .brand-features .feature {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+            font-size: 14px;
+            opacity: 0.85;
+        }
+
+        .brand-features .feature-icon {
+            margin-right: 12px;
+            font-size: 20px;
+        }
+
+        /* Right panel - form */
+        .form-panel {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 60px;
+            background: white;
+        }
+
+        .login-form {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .login-form h2 {
+            font-size: 28px;
+            font-weight: 600;
+            color: #1b5e20;
+            margin-bottom: 8px;
+        }
+
+        .login-form p.subtitle {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 36px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px 16px;
+            font-size: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            font-family: inherit;
+        }
+
+        .form-group input:focus {
+            border-color: #43a047;
+            box-shadow: 0 0 0 3px rgba(67, 160, 71, 0.15);
+        }
+
+        .form-group input::placeholder {
+            color: #aaa;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            font-size: 16px;
+            font-weight: 600;
+            color: white;
+            background: linear-gradient(135deg, #43a047 0%, #2e7d32 100%);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            letter-spacing: 0.5px;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(46, 125, 50, 0.35);
+        }
+
+        .login-btn:active {
+            transform: translateY(0);
+        }
+
+        .login-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .error-msg {
+            background: #ffebee;
+            color: #c62828;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-bottom: 20px;
+            display: none;
+            border-left: 4px solid #c62828;
+        }
+
+        .error-msg.show {
+            display: block;
+            animation: shake 0.4s ease;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-8px); }
+            75% { transform: translateX(8px); }
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 28px 0;
+            color: #999;
+            font-size: 13px;
+        }
+
+        .divider::before, .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #e0e0e0;
+        }
+
+        .divider span {
+            padding: 0 16px;
+        }
+
+        .admin-link {
+            text-align: center;
+        }
+
+        .admin-link a {
+            color: #1565c0;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .admin-link a:hover {
+            text-decoration: underline;
+        }
+
+        .demo-credentials {
+            background: #f1f8e9;
+            padding: 16px;
+            border-radius: 8px;
+            margin-top: 24px;
+            font-size: 13px;
+            color: #33691e;
+            border: 1px solid #c5e1a5;
+        }
+
+        .demo-credentials strong {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .demo-credentials code {
+            background: rgba(0,0,0,0.06);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 12px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .login-container { flex-direction: column; }
+            .brand-panel { padding: 40px 24px; min-height: auto; }
+            .brand-features { display: none; }
+            .form-panel { padding: 40px 24px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <!-- Left Brand Panel -->
+        <div class="brand-panel">
+            <div class="brand-icon">&#9992;</div>
+            <div class="brand-title">Travel Tracker</div>
+            <div class="brand-subtitle">Manage your business travel seamlessly.<br>Submit, track, and stay updated on your trips.</div>
+
+            <div class="brand-features">
+                <div class="feature">
+                    <span class="feature-icon">&#10003;</span>
+                    Submit domestic & international travel
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">&#10003;</span>
+                    Track travel status in real-time
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">&#10003;</span>
+                    View current, upcoming & past trips
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">&#10003;</span>
+                    Easy visa & passport management
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Form Panel -->
+        <div class="form-panel">
+            <div class="login-form">
+                <h2>Employee Login</h2>
+                <p class="subtitle">Sign in to access your travel portal</p>
+
+                <div class="error-msg" id="errorMsg"></div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="e.g. rahul@company.com" autocomplete="email" />
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Enter your password" autocomplete="current-password" />
+                </div>
+
+                <button class="login-btn" id="loginBtn" onclick="handleLogin()">
+                    Sign In
+                </button>
+
+                <div class="divider"><span>or</span></div>
+
+                <div class="admin-link">
+                    <a href="admin.html">Sign in as Admin / HR &rarr;</a>
+                </div>
+
+                <div class="demo-credentials">
+                    <strong>Demo Credentials</strong>
+                    Email: <code>rahul@company.com</code> &nbsp; Password: <code>rahul123</code><br>
+                    Email: <code>priya@company.com</code> &nbsp; Password: <code>priya123</code>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Enter key submits
+        document.getElementById('password').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') handleLogin();
+        });
+        document.getElementById('email').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') document.getElementById('password').focus();
+        });
+
+        function handleLogin() {
+            var email = document.getElementById('email').value.trim();
+            var password = document.getElementById('password').value.trim();
+            var errorMsg = document.getElementById('errorMsg');
+            var loginBtn = document.getElementById('loginBtn');
+
+            errorMsg.className = 'error-msg';
+
+            if (!email || !password) {
+                errorMsg.textContent = 'Please enter both email and password.';
+                errorMsg.className = 'error-msg show';
+                return;
+            }
+
+            loginBtn.disabled = true;
+            loginBtn.textContent = 'Signing in...';
+
+            fetch('/travel/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: email, password: password })
+            })
+            .then(function(res) { return res.json(); })
+            .then(function(data) {
+                loginBtn.disabled = false;
+                loginBtn.textContent = 'Sign In';
+
+                if (data.success) {
+                    // Check role - only employees allowed here
+                    if (data.role === 'admin') {
+                        errorMsg.textContent = 'Admin users should login via the Admin Login page.';
+                        errorMsg.className = 'error-msg show';
+                        return;
+                    }
+
+                    // Store session
+                    sessionStorage.setItem('loggedInUser', JSON.stringify({
+                        id: data.employeeId,
+                        name: data.name,
+                        role: data.role,
+                        department: data.department
+                    }));
+
+                    // Redirect to employee app
+                    window.location.href = '../employee-travel/webapp/index.html';
+                } else {
+                    errorMsg.textContent = data.message || 'Login failed. Please try again.';
+                    errorMsg.className = 'error-msg show';
+                }
+            })
+            .catch(function() {
+                loginBtn.disabled = false;
+                loginBtn.textContent = 'Sign In';
+                errorMsg.textContent = 'Server error. Please try again later.';
+                errorMsg.className = 'error-msg show';
+            });
+        }
+    </script>
+</body>
+</html>
