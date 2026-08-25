@@ -6,12 +6,12 @@
 
     <Page title="My Travel" showNavButton="false">
         <headerContent>
-            <Title id="userName" text="" level="H5" />
             <ToolbarSpacer />
+            <Text id="userName" text="" class="sapUiTinyMarginEnd" />
             <Button id="notificationBtn" icon="sap-icon://bell" type="Transparent" tooltip="Notifications"
-                press="onNotificationPress" />
+                press="onNotificationPress" class="sapUiTinyMarginEnd" />
             <Avatar id="userAvatar" initials="" displaySize="XS" backgroundColor="Accent6"
-                press="onAvatarPress" class="sapUiTinyMarginBegin" />
+                press="onAvatarPress" />
         </headerContent>
 
         <subHeader>
