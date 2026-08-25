@@ -7,9 +7,11 @@
     <Page title="My Travel" showNavButton="false">
         <headerContent>
             <ToolbarSpacer />
-            <Text id="userName" text="" class="sapUiTinyMarginEnd" />
             <Button id="notificationBtn" icon="sap-icon://bell" type="Transparent" tooltip="Notifications"
-                press="onNotificationPress" class="sapUiTinyMarginEnd" />
+                press="onNotificationPress" badgeCustomData="3" />
+            <ToolbarSeparator />
+            <Button id="userMenuBtn" text="{viewModel>/userName}" icon="sap-icon://slim-arrow-down"
+                iconFirst="false" type="Transparent" press="onAvatarPress" />
             <Avatar id="userAvatar" initials="" displaySize="XS" backgroundColor="Accent6"
                 press="onAvatarPress" />
         </headerContent>
