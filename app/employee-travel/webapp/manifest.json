@@ -56,6 +56,11 @@
           "name": "TravelCreate",
           "pattern": "create",
           "target": "TravelDetail"
+        },
+        {
+          "name": "Profile",
+          "pattern": "profile",
+          "target": "Profile"
         }
       ],
       "targets": {
@@ -65,6 +70,10 @@
         },
         "TravelDetail": {
           "viewName": "TravelDetail",
+          "viewLevel": 2
+        },
+        "Profile": {
+          "viewName": "Profile",
           "viewLevel": 2
         }
       }

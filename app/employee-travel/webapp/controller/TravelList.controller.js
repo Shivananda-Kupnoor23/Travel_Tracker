@@ -93,12 +93,7 @@ sap.ui.define([
                             text: "Profile",
                             icon: "sap-icon://person-placeholder",
                             press: function () {
-                                MessageBox.information(
-                                    "Name: " + that._oUser.name + "\n" +
-                                    "Department: " + that._oUser.department + "\n" +
-                                    "Role: " + that._oUser.role,
-                                    { title: "My Profile" }
-                                );
+                                that.getOwnerComponent().getRouter().navTo("Profile");
                             }
                         }),
                         new Button({
