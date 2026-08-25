@@ -25,8 +25,10 @@ sap.ui.define([
             if (sUser) {
                 var oUser = JSON.parse(sUser);
                 this._sEmployeeId = oUser.id;
-                this.byId("userName").setText(oUser.name);
-                this.byId("userDept").setText(oUser.department);
+                this.byId("userName").setText(oUser.name + " (" + oUser.department + ")");
+                var aNames = oUser.name.split(" ");
+                var sInitials = aNames.map(function(n) { return n.charAt(0); }).join("").substring(0, 2).toUpperCase();
+                this.byId("userAvatar").setInitials(sInitials);
             } else {
                 // No session — redirect to login
                 window.location.href = "../login/employee.html";

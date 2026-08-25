@@ -6,14 +6,10 @@
 
     <Page title="My Travel" showNavButton="false">
         <headerContent>
-            <HBox alignItems="Center">
-                <core:Icon src="sap-icon://person-placeholder" size="1.8rem"
-                    color="#0854A0" class="sapUiTinyMarginEnd" />
-                <VBox>
-                    <Text id="userName" text="" class="sapUiTinyMarginEnd" />
-                    <Text id="userDept" text="" class="sapMTextSmall" />
-                </VBox>
-            </HBox>
+            <Avatar id="userAvatar" initials="" displaySize="XS" backgroundColor="Accent6"
+                class="sapUiTinyMarginEnd" />
+            <Title id="userName" text="" level="H5" />
+            <ToolbarSpacer />
             <Button icon="sap-icon://log" tooltip="Logout" press="onLogout" type="Transparent" />
         </headerContent>
 
