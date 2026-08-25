@@ -1,15 +1,13 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
-    "sap/ui/model/Filter",
-    "sap/ui/model/FilterOperator",
     "sap/m/MessageToast"
-], function (Controller, JSONModel, Filter, FilterOperator, MessageToast) {
+], function (Controller, JSONModel, MessageToast) {
     "use strict";
 
     return Controller.extend("travel.tracker.employee.controller.TravelList", {
 
-        _sEmployeeId: "e003", // default employee
+        _sEmployeeId: "",
 
         onInit: function () {
             this.oViewModel = new JSONModel({
@@ -22,36 +20,26 @@ sap.ui.define([
             });
             this.getView().setModel(this.oViewModel, "viewModel");
 
+            // Read logged-in user from sessionStorage
+            var sUser = sessionStorage.getItem("loggedInUser");
+            if (sUser) {
+                var oUser = JSON.parse(sUser);
+                this._sEmployeeId = oUser.id;
+                this.byId("userName").setText(oUser.name);
+                this.byId("userDept").setText(oUser.department);
+            } else {
+                // No session — redirect to login
+                window.location.href = "../login/employee.html";
+                return;
+            }
+
             this.getOwnerComponent().getRouter()
                 .getRoute("TravelList")
                 .attachPatternMatched(this._onRouteMatched, this);
         },
 
         _onRouteMatched: function () {
-            this._loadEmployees();
             this._loadTravels();
-        },
-
-        _loadEmployees: function () {
-            var that = this;
-
-            jQuery.ajax({
-                url: "/travel/Employees",
-                success: function (data) {
-                    var aEmployees = data.value || [];
-                    var oSelect = that.byId("employeeSelect");
-                    if (!oSelect) return;
-
-                    oSelect.removeAllItems();
-                    aEmployees.forEach(function (emp) {
-                        oSelect.addItem(new sap.ui.core.Item({
-                            key: emp.ID,
-                            text: emp.name + " (" + emp.department + ")"
-                        }));
-                    });
-                    oSelect.setSelectedKey(that._sEmployeeId);
-                }
-            });
         },
 
         _loadTravels: function () {
@@ -88,12 +76,6 @@ sap.ui.define([
             });
         },
 
-        onEmployeeChange: function (oEvent) {
-            var sKey = oEvent.getParameter("selectedItem").getKey();
-            this._sEmployeeId = sKey;
-            this._loadTravels();
-        },
-
         onAddTravel: function () {
             this.getOwnerComponent().getRouter().navTo("TravelCreate");
         },
@@ -103,6 +85,11 @@ sap.ui.define([
             var oCtx = oItem.getBindingContext("viewModel");
             var sId = oCtx.getProperty("ID");
             this.getOwnerComponent().getRouter().navTo("TravelDetail", { travelId: sId });
+        },
+
+        onLogout: function () {
+            sessionStorage.removeItem("loggedInUser");
+            window.location.href = "../login/employee.html";
         },
 
         onTabSelect: function () {}

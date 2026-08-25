@@ -6,9 +6,15 @@
 
     <Page title="My Travel" showNavButton="false">
         <headerContent>
-            <Select id="employeeSelect" change="onEmployeeChange"
-                selectedKey="{app>/employeeId}">
-            </Select>
+            <HBox alignItems="Center">
+                <core:Icon src="sap-icon://person-placeholder" size="1.8rem"
+                    color="#0854A0" class="sapUiTinyMarginEnd" />
+                <VBox>
+                    <Text id="userName" text="" class="sapUiTinyMarginEnd" />
+                    <Text id="userDept" text="" class="sapMTextSmall" />
+                </VBox>
+            </HBox>
+            <Button icon="sap-icon://log" tooltip="Logout" press="onLogout" type="Transparent" />
         </headerContent>
 
         <subHeader>

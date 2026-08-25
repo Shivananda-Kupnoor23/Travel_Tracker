@@ -22,12 +22,11 @@ sap.ui.define([
         },
 
         _getEmployeeId: function () {
-            // Get from the TravelList controller's selected employee
-            var oSelect = sap.ui.getCore().byId("__component0---TravelList--employeeSelect");
-            if (oSelect && oSelect.getSelectedKey()) {
-                return oSelect.getSelectedKey();
+            var sUser = sessionStorage.getItem("loggedInUser");
+            if (sUser) {
+                return JSON.parse(sUser).id;
             }
-            return "e003"; // default
+            return "";
         },
 
         _onDetailMatched: function (oEvent) {
