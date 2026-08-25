@@ -5,204 +5,187 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login - Travel Tracker</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: '72', 'Segoe UI', Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
             min-height: 100vh;
+            background: #01579b;
             display: flex;
-            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 50%, #90caf9 100%);
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
         }
 
-        .login-container {
-            display: flex;
-            width: 100%;
-            min-height: 100vh;
+        body::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+            top: -150px;
+            right: -100px;
         }
 
-        /* Left panel - branding */
-        .brand-panel {
-            flex: 1;
-            background: linear-gradient(135deg, #1565c0 0%, #0d47a1 50%, #0a2f6b 100%);
+        body::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 50%;
+            bottom: -120px;
+            left: -80px;
+        }
+
+        .airplane-top {
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 36px;
+            color: rgba(255,255,255,0.7);
+            z-index: 10;
+        }
+
+        .login-card {
+            width: 950px;
+            min-height: 560px;
+            background: white;
+            border-radius: 20px;
+            display: flex;
+            overflow: hidden;
+            box-shadow: 0 25px 80px rgba(0,0,0,0.35);
+            z-index: 5;
+            position: relative;
+        }
+
+        /* Left panel */
+        .image-panel {
+            width: 420px;
+            min-height: 100%;
+            background: linear-gradient(170deg, #0d47a1 0%, #1a237e 40%, #0a1545 100%);
+            position: relative;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 60px;
-            color: white;
-            position: relative;
+            padding: 40px;
             overflow: hidden;
         }
 
-        .brand-panel::before {
+        .image-panel::before {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
-            animation: rotate 20s linear infinite;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background:
+                radial-gradient(ellipse at 30% 20%, rgba(255,255,255,0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 80%, rgba(255,255,255,0.04) 0%, transparent 50%);
         }
 
-        @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .brand-icon {
-            font-size: 80px;
-            margin-bottom: 24px;
-            z-index: 1;
-        }
-
-        .brand-title {
-            font-size: 36px;
-            font-weight: 300;
-            letter-spacing: 2px;
-            margin-bottom: 12px;
-            z-index: 1;
-        }
-
-        .brand-subtitle {
-            font-size: 16px;
-            opacity: 0.8;
-            text-align: center;
-            line-height: 1.6;
-            z-index: 1;
-        }
-
-        .brand-features {
-            margin-top: 48px;
-            z-index: 1;
-        }
-
-        .brand-features .feature {
-            display: flex;
-            align-items: center;
-            margin-bottom: 16px;
-            font-size: 14px;
-            opacity: 0.85;
-        }
-
-        .brand-features .feature-icon {
-            margin-right: 12px;
-            font-size: 20px;
-        }
-
-        /* Right panel - form */
-        .form-panel {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 60px;
-            background: white;
-        }
-
-        .login-form {
-            width: 100%;
-            max-width: 400px;
-        }
-
-        .login-form h2 {
-            font-size: 28px;
-            font-weight: 600;
-            color: #0d47a1;
+        .image-panel .brand-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            color: white;
+            font-weight: 700;
+            z-index: 2;
             margin-bottom: 8px;
         }
 
-        .login-form p.subtitle {
-            color: #666;
-            font-size: 14px;
-            margin-bottom: 36px;
+        .image-panel .brand-name span {
+            font-style: italic;
+            font-weight: 400;
+        }
+
+        .image-panel .tagline {
+            font-size: 13px;
+            color: rgba(255,255,255,0.7);
+            z-index: 2;
+            text-align: center;
+            line-height: 1.7;
+            font-style: italic;
+            max-width: 280px;
+        }
+
+        .travel-illustration {
+            margin: 32px 0;
+            z-index: 2;
+            font-size: 100px;
+            filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
+        }
+
+        .features-list {
+            z-index: 2;
+            margin-top: 16px;
+        }
+
+        .features-list .feat {
+            display: flex;
+            align-items: center;
+            color: rgba(255,255,255,0.8);
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+        .features-list .feat-dot {
+            width: 6px;
+            height: 6px;
+            background: #64b5f6;
+            border-radius: 50%;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+
+        /* Right panel */
+        .form-panel {
+            flex: 1;
+            padding: 48px 44px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
         }
 
         .admin-badge {
             display: inline-block;
             background: #e3f2fd;
-            color: #1565c0;
-            padding: 4px 12px;
+            color: #0d47a1;
+            padding: 4px 14px;
             border-radius: 20px;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 600;
-            margin-bottom: 24px;
-            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+            width: fit-content;
         }
 
-        .form-group {
-            margin-bottom: 24px;
+        .form-panel .welcome-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: #0d47a1;
+            margin-bottom: 4px;
         }
 
-        .form-group label {
-            display: block;
-            font-size: 13px;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 14px 16px;
-            font-size: 15px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            outline: none;
-            transition: border-color 0.3s, box-shadow 0.3s;
-            font-family: inherit;
-        }
-
-        .form-group input:focus {
-            border-color: #1e88e5;
-            box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.15);
-        }
-
-        .form-group input::placeholder {
-            color: #aaa;
-        }
-
-        .login-btn {
-            width: 100%;
-            padding: 14px;
-            font-size: 16px;
-            font-weight: 600;
-            color: white;
-            background: linear-gradient(135deg, #1e88e5 0%, #1565c0 100%);
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            letter-spacing: 0.5px;
-        }
-
-        .login-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(21, 101, 192, 0.35);
-        }
-
-        .login-btn:active {
-            transform: translateY(0);
-        }
-
-        .login-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
+        .form-panel .login-subtitle {
+            font-size: 14px;
+            color: #999;
+            margin-bottom: 32px;
         }
 
         .error-msg {
             background: #ffebee;
             color: #c62828;
-            padding: 12px 16px;
+            padding: 10px 14px;
             border-radius: 8px;
-            font-size: 14px;
-            margin-bottom: 20px;
+            font-size: 13px;
+            margin-bottom: 16px;
             display: none;
-            border-left: 4px solid #c62828;
+            border-left: 3px solid #c62828;
         }
 
         .error-msg.show {
@@ -212,16 +195,91 @@
 
         @keyframes shake {
             0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-8px); }
-            75% { transform: translateX(8px); }
+            25% { transform: translateX(-6px); }
+            75% { transform: translateX(6px); }
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .input-group .input-icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 18px;
+            color: #90caf9;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 14px 16px 14px 44px;
+            font-size: 14px;
+            font-family: 'Poppins', sans-serif;
+            border: 1.5px solid #e0e0e0;
+            border-radius: 10px;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            background: #f8fbff;
+        }
+
+        .input-group input:focus {
+            border-color: #0d47a1;
+            box-shadow: 0 0 0 3px rgba(13, 71, 161, 0.1);
+            background: white;
+        }
+
+        .input-group input::placeholder { color: #bbb; }
+
+        .forgot-link {
+            text-align: right;
+            margin-top: -12px;
+            margin-bottom: 20px;
+        }
+
+        .forgot-link a {
+            font-size: 12px;
+            color: #0d47a1;
+            text-decoration: none;
+        }
+
+        .forgot-link a:hover { text-decoration: underline; }
+
+        .login-btn {
+            width: 160px;
+            margin: 0 auto;
+            display: block;
+            padding: 12px 32px;
+            font-size: 15px;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            color: white;
+            background: linear-gradient(135deg, #1565c0 0%, #0d47a1 100%);
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(13, 71, 161, 0.4);
+        }
+
+        .login-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
         }
 
         .divider {
             display: flex;
             align-items: center;
-            margin: 28px 0;
-            color: #999;
-            font-size: 13px;
+            margin: 24px 0;
+            color: #ccc;
+            font-size: 12px;
         }
 
         .divider::before, .divider::after {
@@ -231,124 +289,142 @@
             background: #e0e0e0;
         }
 
-        .divider span {
-            padding: 0 16px;
-        }
+        .divider span { padding: 0 14px; color: #999; }
 
         .employee-link {
             text-align: center;
+            font-size: 13px;
+            color: #666;
         }
 
         .employee-link a {
-            color: #2e7d32;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        .employee-link a:hover {
-            text-decoration: underline;
-        }
-
-        .demo-credentials {
-            background: #e3f2fd;
-            padding: 16px;
-            border-radius: 8px;
-            margin-top: 24px;
-            font-size: 13px;
             color: #0d47a1;
-            border: 1px solid #90caf9;
+            text-decoration: none;
+            font-weight: 600;
         }
 
-        .demo-credentials strong {
-            display: block;
-            margin-bottom: 6px;
-            font-size: 12px;
+        .employee-link a:hover { text-decoration: underline; }
+
+        .demo-box {
+            background: #e3f2fd;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-size: 11px;
+            color: #0d47a1;
+        }
+
+        .demo-box strong {
+            font-size: 10px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
-        .demo-credentials code {
+        .demo-box code {
             background: rgba(0,0,0,0.06);
-            padding: 2px 6px;
+            padding: 1px 5px;
             border-radius: 3px;
-            font-size: 12px;
         }
 
-        @media (max-width: 768px) {
-            .login-container { flex-direction: column; }
-            .brand-panel { padding: 40px 24px; min-height: auto; }
-            .brand-features { display: none; }
-            .form-panel { padding: 40px 24px; }
+        .landmarks {
+            position: absolute;
+            bottom: 0; right: 0;
+            width: 100%; height: 80px;
+            opacity: 0.06; z-index: 0;
+        }
+
+        .landmarks svg { width: 100%; height: 100%; }
+
+        @media (max-width: 800px) {
+            .login-card { flex-direction: column; width: 95%; min-height: auto; }
+            .image-panel { width: 100%; min-height: 200px; padding: 30px; }
+            .travel-illustration { font-size: 60px; margin: 16px 0; }
+            .form-panel { padding: 32px 24px; }
         }
     </style>
 </head>
 <body>
-    <div class="login-container">
-        <!-- Left Brand Panel -->
-        <div class="brand-panel">
-            <div class="brand-icon">&#128202;</div>
-            <div class="brand-title">Travel Tracker</div>
-            <div class="brand-subtitle">Travel Intelligence Dashboard for HR & Admin.<br>Real-time company-wide travel insights.</div>
+    <div class="airplane-top">&#9992;</div>
 
-            <div class="brand-features">
-                <div class="feature">
-                    <span class="feature-icon">&#128200;</span>
-                    Real-time travel analytics & reports
-                </div>
-                <div class="feature">
-                    <span class="feature-icon">&#127758;</span>
-                    World map with live travel markers
-                </div>
-                <div class="feature">
-                    <span class="feature-icon">&#128197;</span>
-                    Calendar view with daily breakdown
-                </div>
-                <div class="feature">
-                    <span class="feature-icon">&#129302;</span>
-                    AI chatbot for travel intelligence
-                </div>
-                <div class="feature">
-                    <span class="feature-icon">&#10003;</span>
-                    Approve / reject travel requests
-                </div>
+    <div class="login-card">
+        <!-- Left Panel -->
+        <div class="image-panel">
+            <div class="brand-name">Travel <span>Tracker</span></div>
+            <div class="tagline">"Real-time travel intelligence at your fingertips. Monitor, approve, and manage company travel."</div>
+
+            <div class="travel-illustration">&#128202;</div>
+
+            <div class="features-list">
+                <div class="feat"><span class="feat-dot"></span>Real-time travel analytics & reports</div>
+                <div class="feat"><span class="feat-dot"></span>World map with live travel markers</div>
+                <div class="feat"><span class="feat-dot"></span>Calendar view with daily breakdown</div>
+                <div class="feat"><span class="feat-dot"></span>AI chatbot for travel intelligence</div>
+                <div class="feat"><span class="feat-dot"></span>Approve / reject travel requests</div>
             </div>
         </div>
 
-        <!-- Right Form Panel -->
+        <!-- Right Panel -->
         <div class="form-panel">
-            <div class="login-form">
-                <span class="admin-badge">ADMIN / HR ACCESS</span>
-                <h2>Admin Login</h2>
-                <p class="subtitle">Sign in to access the Travel Intelligence Dashboard</p>
+            <span class="admin-badge">ADMIN / HR ACCESS</span>
+            <div class="welcome-text">Welcome</div>
+            <div class="login-subtitle">Login with Email</div>
 
-                <div class="error-msg" id="errorMsg"></div>
+            <div class="error-msg" id="errorMsg"></div>
 
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" placeholder="e.g. shivananda@company.com" autocomplete="email" />
-                </div>
+            <div class="input-group">
+                <span class="input-icon">&#9993;</span>
+                <input type="email" id="email" placeholder="admin@company.com" autocomplete="email" />
+            </div>
 
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" placeholder="Enter your password" autocomplete="current-password" />
-                </div>
+            <div class="input-group">
+                <span class="input-icon">&#128274;</span>
+                <input type="password" id="password" placeholder="**********" autocomplete="current-password" />
+            </div>
 
-                <button class="login-btn" id="loginBtn" onclick="handleLogin()">
-                    Sign In as Admin
-                </button>
+            <div class="forgot-link">
+                <a href="#">Forgot your password?</a>
+            </div>
 
-                <div class="divider"><span>or</span></div>
+            <button class="login-btn" id="loginBtn" onclick="handleLogin()">Login</button>
 
-                <div class="employee-link">
-                    <a href="employee.html">&larr; Sign in as Employee</a>
-                </div>
+            <div class="divider"><span>OR</span></div>
 
-                <div class="demo-credentials">
-                    <strong>Demo Admin Credentials</strong>
-                    Email: <code>shivananda@company.com</code> &nbsp; Password: <code>admin123</code><br>
-                    Email: <code>sneha@company.com</code> &nbsp; Password: <code>admin123</code>
-                </div>
+            <div class="employee-link">
+                Not an admin? <a href="employee.html">Login as Employee</a>
+            </div>
+
+            <div class="demo-box">
+                <strong>Demo Admin Credentials</strong><br>
+                Email: <code>shivananda@company.com</code> &nbsp; Password: <code>admin123</code><br>
+                Email: <code>sneha@company.com</code> &nbsp; Password: <code>admin123</code>
+            </div>
+
+            <div class="landmarks">
+                <svg viewBox="0 0 500 80" preserveAspectRatio="none">
+                    <path d="M80,80 L80,40 Q90,15 100,40 L100,80 Z" fill="#0d47a1"/>
+                    <rect x="85" y="35" width="10" height="5" rx="5" fill="#0d47a1"/>
+                    <rect x="120" y="30" width="20" height="50" fill="#0d47a1"/>
+                    <rect x="125" y="35" width="4" height="4" fill="white"/>
+                    <rect x="131" y="35" width="4" height="4" fill="white"/>
+                    <rect x="125" y="42" width="4" height="4" fill="white"/>
+                    <rect x="131" y="42" width="4" height="4" fill="white"/>
+                    <rect x="155" y="20" width="12" height="60" fill="#0d47a1"/>
+                    <polygon points="155,20 161,5 167,20" fill="#0d47a1"/>
+                    <rect x="185" y="15" width="18" height="65" fill="#0d47a1"/>
+                    <rect x="189" y="20" width="3" height="3" fill="white"/>
+                    <rect x="196" y="20" width="3" height="3" fill="white"/>
+                    <path d="M230,80 L230,45 Q240,25 250,45 L250,80 Z" fill="#0d47a1"/>
+                    <rect x="270" y="25" width="22" height="55" fill="#0d47a1"/>
+                    <rect x="280" y="20" width="15" height="60" fill="#0d47a1"/>
+                    <circle cx="320" cy="60" r="12" fill="#0d47a1"/>
+                    <rect x="318" y="65" width="4" height="15" fill="#0d47a1"/>
+                    <circle cx="345" cy="55" r="10" fill="#0d47a1"/>
+                    <rect x="343" y="60" width="4" height="20" fill="#0d47a1"/>
+                    <path d="M370,30 L400,25 L405,28 L385,32 L395,35 L400,34 L390,38 L375,35 Z" fill="#0d47a1"/>
+                    <rect x="420" y="35" width="15" height="45" fill="#0d47a1"/>
+                    <rect x="440" y="25" width="20" height="55" fill="#0d47a1"/>
+                    <rect x="465" y="40" width="12" height="40" fill="#0d47a1"/>
+                </svg>
             </div>
         </div>
     </div>
@@ -386,7 +462,7 @@
             .then(function(res) { return res.json(); })
             .then(function(data) {
                 loginBtn.disabled = false;
-                loginBtn.textContent = 'Sign In as Admin';
+                loginBtn.textContent = 'Login';
 
                 if (data.success) {
                     if (data.role !== 'admin') {
@@ -394,14 +470,12 @@
                         errorMsg.className = 'error-msg show';
                         return;
                     }
-
                     sessionStorage.setItem('loggedInUser', JSON.stringify({
                         id: data.employeeId,
                         name: data.name,
                         role: data.role,
                         department: data.department
                     }));
-
                     window.location.href = '../admin-dashboard/webapp/index.html';
                 } else {
                     errorMsg.textContent = data.message || 'Login failed. Please try again.';
@@ -410,7 +484,7 @@
             })
             .catch(function() {
                 loginBtn.disabled = false;
-                loginBtn.textContent = 'Sign In as Admin';
+                loginBtn.textContent = 'Login';
                 errorMsg.textContent = 'Server error. Please try again later.';
                 errorMsg.className = 'error-msg show';
             });
