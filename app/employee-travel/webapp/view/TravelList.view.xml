@@ -10,7 +10,7 @@
             <Button id="notificationBtn" icon="sap-icon://bell" type="Transparent" tooltip="Notifications"
                 press="onNotificationPress" badgeCustomData="3" />
             <ToolbarSeparator />
-            <Button id="userMenuBtn" text="{viewModel>/userName}" icon="sap-icon://slim-arrow-down"
+            <Button id="userMenuBtn" icon="sap-icon://slim-arrow-down"
                 iconFirst="false" type="Transparent" press="onAvatarPress" />
             <Avatar id="userAvatar" initials="" displaySize="XS" backgroundColor="Accent6"
                 press="onAvatarPress" />

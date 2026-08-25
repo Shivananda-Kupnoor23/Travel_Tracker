@@ -28,7 +28,7 @@ sap.ui.define([
             if (sUser) {
                 this._oUser = JSON.parse(sUser);
                 this._sEmployeeId = this._oUser.id;
-                this.oViewModel.setProperty("/userName", this._oUser.name);
+                this.byId("userMenuBtn").setText(this._oUser.name);
                 var aNames = this._oUser.name.split(" ");
                 var sInitials = aNames.map(function(n) { return n.charAt(0); }).join("").substring(0, 2).toUpperCase();
                 this.byId("userAvatar").setInitials(sInitials);
