@@ -1,0 +1,47 @@
+_schema-version: "3.1"
+ID: travel-tracker
+version: 1.0.0
+description: Travel Tracker - Employee Travel Intelligence System
+
+parameters:
+  enable-parallel-deployments: true
+
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - cd react-ui && npm install && npm run build
+        - mkdir -p app/react-dist
+        - cp -r react-ui/dist/* app/react-dist/
+
+modules:
+  - name: travel-tracker-srv
+    type: nodejs
+    path: gen/srv
+    parameters:
+      buildpack: nodejs_buildpack
+      memory: 256M
+    build-parameters:
+      builder: npm
+    provides:
+      - name: srv-api
+        properties:
+          srv-url: ${default-url}
+    requires:
+      - name: travel-tracker-db
+
+  - name: travel-tracker-db-deployer
+    type: hdb
+    path: gen/db
+    parameters:
+      buildpack: nodejs_buildpack
+      memory: 256M
+    requires:
+      - name: travel-tracker-db
+
+resources:
+  - name: travel-tracker-db
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hana
+      service-plan: hdi-shared
