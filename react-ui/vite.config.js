@@ -12,6 +12,7 @@ export default defineConfig({
       '/index.html': 'http://localhost:4004'
     }
   },
+  base: './',
   build: {
     outDir: 'dist',
     emptyOutDir: true
