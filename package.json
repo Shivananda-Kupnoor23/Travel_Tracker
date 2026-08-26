@@ -4,10 +4,10 @@
   "dependencies": {
     "@sap/cds": "^9",
     "express": "^4",
-    "@cap-js/hana": "^2"
+    "@cap-js/hana": "^2",
+    "@cap-js/sqlite": "^2"
   },
   "devDependencies": {
-    "@cap-js/sqlite": "^2",
     "@sap/cds-dk": "^9"
   },
   "scripts": {
@@ -20,7 +20,18 @@
   "cds": {
     "requires": {
       "db": {
-        "kind": "sql"
+        "kind": "sqlite",
+        "impl": "@cap-js/sqlite",
+        "credentials": {
+          "database": "db.sqlite"
+        },
+        "[production]": {
+          "kind": "sqlite",
+          "impl": "@cap-js/sqlite",
+          "credentials": {
+            "database": "db.sqlite"
+          }
+        }
       }
     }
   }

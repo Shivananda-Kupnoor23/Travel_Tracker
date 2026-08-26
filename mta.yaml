@@ -14,36 +14,22 @@ build-parameters:
         - npm --prefix react-ui run build
         - mkdir -p app/react-dist
         - cp -r react-ui/dist/. app/react-dist/
-        - npx -y cds build --production
 
 modules:
   - name: travel-tracker-srv
     type: nodejs
-    path: gen/srv
+    path: .
     parameters:
       buildpack: nodejs_buildpack
       memory: 256M
     build-parameters:
       builder: npm
+      ignore:
+        - react-ui/node_modules/
+        - react-ui/dist/
+        - mta_archives/
+        - .git/
     provides:
       - name: srv-api
         properties:
           srv-url: ${default-url}
-    requires:
-      - name: travel-tracker-db
-
-  - name: travel-tracker-db-deployer
-    type: hdb
-    path: gen/db
-    parameters:
-      buildpack: nodejs_buildpack
-      memory: 256M
-    requires:
-      - name: travel-tracker-db
-
-resources:
-  - name: travel-tracker-db
-    type: com.sap.xs.hdi-container
-    parameters:
-      service: hana
-      service-plan: hdi-shared
