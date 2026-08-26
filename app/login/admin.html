@@ -469,13 +469,15 @@
                         errorMsg.className = 'error-msg show';
                         return;
                     }
-                    sessionStorage.setItem('loggedInUser', JSON.stringify({
+                    var userData = encodeURIComponent(JSON.stringify({
                         id: data.employeeId,
                         name: data.name,
                         role: data.role,
                         department: data.department
                     }));
-                    window.location.href = '/#/dashboard';
+                    var reactPort = window.location.port === '5173' ? '' : ':5173';
+                    var reactHost = window.location.protocol + '//' + window.location.hostname + reactPort;
+                    window.location.href = reactHost + '/#/auth?user=' + userData + '&redirect=/dashboard';
                 } else {
                     errorMsg.textContent = data.message || 'Login failed. Please try again.';
                     errorMsg.className = 'error-msg show';

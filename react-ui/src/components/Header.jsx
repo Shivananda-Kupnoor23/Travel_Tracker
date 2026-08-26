@@ -18,7 +18,7 @@ export default function Header({ title }) {
 
   const handleLogout = () => {
     logout();
-    window.location.href = '/index.html';
+    window.location.href = '/#/';
   };
 
   return (

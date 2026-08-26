@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import Landing from './pages/Landing';
+import AuthCallback from './pages/AuthCallback';
 import TravelList from './pages/employee/TravelList';
 import TravelForm from './pages/employee/TravelForm';
 import Profile from './pages/employee/Profile';
@@ -11,6 +12,7 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<Landing />} />
+      <Route path="/auth" element={<AuthCallback />} />
       <Route path="/my-travel" element={<ProtectedRoute><TravelList /></ProtectedRoute>} />
       <Route path="/my-travel/new" element={<ProtectedRoute><TravelForm /></ProtectedRoute>} />
       <Route path="/my-travel/edit/:id" element={<ProtectedRoute><TravelForm /></ProtectedRoute>} />
