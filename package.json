@@ -24,13 +24,13 @@
         "kind": "sqlite",
         "impl": "@cap-js/sqlite",
         "credentials": {
-          "database": "db.sqlite"
+          "database": ":memory:"
         },
         "[production]": {
           "kind": "sqlite",
           "impl": "@cap-js/sqlite",
           "credentials": {
-            "database": "db.sqlite"
+            "database": ":memory:"
           }
         }
       },
