@@ -6,13 +6,13 @@
     "express": "^4",
     "@cap-js/hana": "^2",
     "@cap-js/sqlite": "^2",
-    "passport": "^0.7.0"
-  },
-  "devDependencies": {
+    "passport": "^0.7.0",
     "@sap/cds-dk": "^9"
   },
+  "devDependencies": {
+  },
   "scripts": {
-    "start": "npx cds serve all --in-memory?",
+    "start": "node node_modules/@sap/cds/bin/serve.js all --in-memory?",
     "build:react": "cd react-ui && npm install && npm run build",
     "build:deploy": "npm run build:react && mkdir -p app/react-dist && cp -r react-ui/dist/* app/react-dist/",
     "build": "cds build --production"
