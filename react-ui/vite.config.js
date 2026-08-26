@@ -7,7 +7,9 @@ export default defineConfig({
     port: 5173,
     proxy: {
       '/travel': 'http://localhost:4004',
-      '/api': 'http://localhost:5000'
+      '/api': 'http://localhost:5000',
+      '/login': 'http://localhost:4004',
+      '/index.html': 'http://localhost:4004'
     }
   },
   build: {

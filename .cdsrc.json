@@ -1,15 +1,2 @@
 {
-  "build": {
-    "target": "."
-  },
-  "server": {
-    "vite": false
-  },
-  "cds": {
-    "env": {
-      "folders": {
-        "app": "app"
-      }
-    }
-  }
 }
