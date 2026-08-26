@@ -12,6 +12,8 @@ build-parameters:
       commands:
         - npm --prefix react-ui install
         - npm --prefix react-ui run build
+        - mkdir -p app/react-dist
+        - cp -r react-ui/dist/. app/react-dist/
         - npx -y cds build --production
 
 modules:
@@ -29,23 +31,6 @@ modules:
           srv-url: ${default-url}
     requires:
       - name: travel-tracker-db
-
-  - name: travel-tracker-react
-    type: staticfile_buildpack
-    path: react-ui/dist
-    parameters:
-      buildpack: staticfile_buildpack
-      memory: 64M
-    build-parameters:
-      builder: custom
-      commands: []
-    requires:
-      - name: srv-api
-        group: destinations
-        properties:
-          name: srv
-          url: ~{srv-url}
-          forwardAuthToken: true
 
   - name: travel-tracker-db-deployer
     type: hdb
