@@ -12,7 +12,7 @@
   "devDependencies": {
   },
   "scripts": {
-    "start": "node node_modules/@sap/cds/bin/serve.js all --in-memory",
+    "start": "cds-serve",
     "build:react": "cd react-ui && npm install && npm run build",
     "build:deploy": "npm run build:react && mkdir -p app/react-dist && cp -r react-ui/dist/* app/react-dist/",
     "build": "cds build --production"
