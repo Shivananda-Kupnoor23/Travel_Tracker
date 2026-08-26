@@ -29,3 +29,8 @@ t027,e012,Domestic,India,India,Chennai,Delhi,"2026-08-08","2026-08-11",Tax Filin
 t028,e006,International,India,Japan,,,"2026-09-05","2026-09-15",Product Launch,Planned,P4567890,Applied,2026-08-25T08:00:00Z,2026-08-25T08:00:00Z
 t029,e013,International,India,Germany,,,"2026-09-01","2026-09-07",Finance Summit,Planned,P3344556,Need Visa,2026-08-24T08:00:00Z,2026-08-24T08:00:00Z
 t030,e005,International,India,Singapore,,,"2026-08-15","2026-08-25",HR Tech Conference,Travelling,P5566778,Have Visa,2026-08-05T08:00:00Z,2026-08-05T08:00:00Z
+t031,e002,International,India,Singapore,,,"2026-08-25","2026-09-04",Sales Strategy Meeting,Travelling,P2345678,Have Visa,2026-08-15T08:00:00Z,2026-08-15T08:00:00Z
+t032,e002,International,India,Germany,,,"2026-09-10","2026-09-18",Tech Expo Berlin,Approved,P2345678,Have Visa,2026-08-20T08:00:00Z,2026-08-20T08:00:00Z
+t033,e002,Domestic,India,India,Mumbai,Bangalore,"2026-09-22","2026-09-25",Client Workshop,Planned,,,,2026-08-22T08:00:00Z,2026-08-22T08:00:00Z
+t034,e002,International,India,Japan,,,"2026-07-10","2026-07-18",Partner Summit Tokyo,Completed,P2345678,Have Visa,2026-06-25T08:00:00Z,2026-06-25T08:00:00Z
+t035,e002,Domestic,India,India,Delhi,Chennai,"2026-07-25","2026-07-28",Sales Review,Completed,,,,2026-07-15T08:00:00Z,2026-07-15T08:00:00Z
