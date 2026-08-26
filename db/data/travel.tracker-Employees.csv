@@ -1,9 +1,9 @@
 ID,name,email,password,department,manager,role,createdAt,modifiedAt
-e001,Shivananda Kumar,shivananda@company.com,admin123,Engineering,Rajesh Nair,admin,2026-01-15T08:00:00Z,2026-01-15T08:00:00Z
-e002,Priya Sharma,priya@company.com,priya123,Sales,Anita Desai,employee,2026-01-15T08:00:00Z,2026-01-15T08:00:00Z
+e001,Shivananda Kumar,hr@gmail.com,hr@123,Engineering,Rajesh Nair,admin,2026-01-15T08:00:00Z,2026-01-15T08:00:00Z
+e002,Sunil Kumar,sunil@gmail.com,sunil@123,Sales,Anita Desai,employee,2026-01-15T08:00:00Z,2026-01-15T08:00:00Z
 e003,Rahul Menon,rahul@company.com,rahul123,Engineering,Shivananda Kumar,employee,2026-02-01T08:00:00Z,2026-02-01T08:00:00Z
 e004,Arun Patel,arun@company.com,arun123,Engineering,Shivananda Kumar,employee,2026-02-01T08:00:00Z,2026-02-01T08:00:00Z
-e005,Sneha Reddy,sneha@company.com,admin123,HR,Meera Joshi,admin,2026-01-20T08:00:00Z,2026-01-20T08:00:00Z
+e005,Sneha Reddy,sneha@company.com,sneha123,HR,Meera Joshi,admin,2026-01-20T08:00:00Z,2026-01-20T08:00:00Z
 e006,Kiran Rao,kiran@company.com,kiran123,Marketing,Vikram Sinha,employee,2026-03-01T08:00:00Z,2026-03-01T08:00:00Z
 e007,Neha Gupta,neha@company.com,neha123,Sales,Anita Desai,employee,2026-03-10T08:00:00Z,2026-03-10T08:00:00Z
 e008,Deepa Iyer,deepa@company.com,deepa123,Finance,Suresh Kulkarni,employee,2026-02-15T08:00:00Z,2026-02-15T08:00:00Z
