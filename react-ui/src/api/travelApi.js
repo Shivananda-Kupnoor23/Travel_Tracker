@@ -44,7 +44,6 @@ export const rejectTravel = (travelId) =>
 export const cancelTravel = (travelId) =>
   fetchJson(`${BASE}/cancelTravel`, { method: 'POST', body: JSON.stringify({ travelId }) });
 
-// Chatbot
+// Chatbot (calls CAP backend, not separate Python server)
 export const chatbotAsk = (question) =>
-  fetch('/api/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ question }) })
-    .then(r => r.json());
+  fetchJson(`${BASE}/askChatbot`, { method: 'POST', body: JSON.stringify({ question }) });

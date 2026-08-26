@@ -45,6 +45,21 @@ service TravelService @(path: '/travel') {
     message    : String;
   };
 
+  // Chatbot
+  action askChatbot(question : String) returns {
+    answer  : String;
+    data    : array of {
+      col1 : String;
+      col2 : String;
+      col3 : String;
+      col4 : String;
+      col5 : String;
+      col6 : String;
+    };
+    sql     : String;
+    success : Boolean;
+  };
+
   // Admin actions
   action approveTravel(travelId : String) returns Travels;
   action rejectTravel(travelId : String)  returns Travels;

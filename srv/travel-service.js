@@ -1,4 +1,5 @@
 const cds = require('@sap/cds');
+const { askChatbot } = require('./chatbot-handler');
 
 module.exports = cds.service.impl(async function () {
   const { Employees, Travels } = this.entities;
@@ -188,6 +189,15 @@ module.exports = cds.service.impl(async function () {
       department: employee.department,
       message: 'Login successful'
     };
+  });
+
+  // ===================== CHATBOT =====================
+
+  this.on('askChatbot', async (req) => {
+    const { question } = req.data;
+    if (!question) return { answer: 'Please ask a question.', data: [], sql: '', success: false };
+    const db = await cds.connect.to('db');
+    return await askChatbot(question, db);
   });
 
   // ===================== ADMIN ACTIONS =====================
