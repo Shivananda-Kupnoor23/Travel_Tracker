@@ -475,10 +475,11 @@
                         role: data.role,
                         department: data.department
                     }));
-                    var base = window.location.port === '4004'
-                        ? window.location.protocol + '//' + window.location.hostname + ':5173'
-                        : window.location.origin;
-                    window.location.href = base + '/#/auth?user=' + userData + '&redirect=/dashboard';
+                    if (window.location.port === '4004') {
+                        window.location.href = window.location.protocol + '//' + window.location.hostname + ':5173/#/auth?user=' + userData + '&redirect=/dashboard';
+                    } else {
+                        window.location.href = window.location.origin + '/react-dist/index.html#/auth?user=' + userData + '&redirect=/dashboard';
+                    }
                 } else {
                     errorMsg.textContent = data.message || 'Login failed. Please try again.';
                     errorMsg.className = 'error-msg show';

@@ -18,7 +18,7 @@ export default function Header({ title }) {
 
   const handleLogout = () => {
     logout();
-    window.location.href = '/#/';
+    window.location.href = '/login/employee.html';
   };
 
   return (
