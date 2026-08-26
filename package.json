@@ -24,7 +24,7 @@
         "kind": "sqlite",
         "impl": "@cap-js/sqlite",
         "credentials": {
-          "database": ":memory:"
+          "url": ":memory:"
         }
       },
       "auth": {
