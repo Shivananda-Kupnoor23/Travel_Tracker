@@ -19,5 +19,8 @@ chatbot/.env
 chatbot/venv/
 chatbot/__pycache__/
 
+# React UI
+app/react-ui/dist/
+
 # @cap-js/cds-typer
 @cds-models

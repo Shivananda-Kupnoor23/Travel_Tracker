@@ -1,6 +1,0 @@
-<mvc:View
-    controllerName="travel.tracker.admin.controller.App"
-    xmlns:mvc="sap.ui.core.mvc"
-    xmlns="sap.m">
-    <App id="appControl" />
-</mvc:View>
