@@ -12,7 +12,7 @@
     "@sap/cds-dk": "^9"
   },
   "scripts": {
-    "start": "node server.js",
+    "start": "cds-serve",
     "build:react": "cd react-ui && npm install && npm run build",
     "build:deploy": "npm run build:react && mkdir -p app/react-dist && cp -r react-ui/dist/* app/react-dist/",
     "build": "cds build --production"
@@ -25,13 +25,6 @@
         "impl": "@cap-js/sqlite",
         "credentials": {
           "database": ":memory:"
-        },
-        "[production]": {
-          "kind": "sqlite",
-          "impl": "@cap-js/sqlite",
-          "credentials": {
-            "database": ":memory:"
-          }
         }
       },
       "auth": {
